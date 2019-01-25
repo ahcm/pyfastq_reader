@@ -6,27 +6,29 @@ from __future__ import print_function
 import sys
 
 def fastq_reader(filename):
-  with open(filename, 'r') as infile:
-     name = infile.readline().rstrip()
-     while True:
-       seq = ""
-       for s in infile:
-         if s[0] == '+':
-           commentp = s.rstrip()
-           break
-         else:
-           seq += s.rstrip()
-       qual = ""
-       for q in infile:
-         if len(qual) > 0 and  q[0] == '@':
-           yield name, seq, qual
-           name = q.rstrip()
-           break
-         else:
-           qual += q.rstrip()
-       else:
-         yield name, seq, qual
-         return
+  return fastq_reader_fh(open(filename, 'r'))
+
+def fastq_reader_fh(infile):
+  name = infile.readline().rstrip()
+  while True:
+    seq = ""
+    for s in infile:
+      if s[0] == '+':
+        commentp = s.rstrip()
+        break
+      else:
+        seq += s.rstrip()
+    qual = ""
+    for q in infile:
+      if len(qual) > 0 and  q[0] == '@':
+        yield name, seq, qual
+        name = q.rstrip()
+        break
+      else:
+        qual += q.rstrip()
+    else:
+      yield name, seq, qual
+      return
 
 if __name__ == '__main__':
   for filename in sys.argv[1:]:
