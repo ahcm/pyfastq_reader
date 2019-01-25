@@ -6,11 +6,9 @@ from __future__ import print_function
 import sys
 
 def fastq_reader(filename):
-  i = 0
   with open(filename, 'r') as infile:
      name = infile.readline().rstrip()
      while True:
-       i += 1
        seq = ""
        for s in infile:
          if s[0] == '+':
