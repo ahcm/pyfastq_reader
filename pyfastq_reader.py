@@ -30,10 +30,13 @@ def fastq_reader_fh(infile):
       yield name, seq, qual
       return
 
-if __name__ == '__main__':
+def main():
   for filename in sys.argv[1:]:
     count = 0
     for head, seq, qual in fastq_reader(filename):
       count += 1
     print(count)
+
+if __name__ == '__main__':
+  main()
 
