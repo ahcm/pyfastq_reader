@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='pyfastq_reader',
-    version='1.0.1',
+    version='1.1.0',
     author='Andy Hauser',
     author_email='Andreas.Hauser@LMU.de',
     license='LICENSE',
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description='Pure python reader for the FASTQ format used in sequencing',
     url='https://github.com/ahcm/pyfastq_reader',
     packages=setuptools.find_packages(),
-    scripts=['pyfastq_reader.py'],
+    entry_points={ 'console_scripts': [ 'pyfastq_reader=pyfastq_reader:main', ], },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
