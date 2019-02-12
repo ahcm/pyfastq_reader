@@ -5,6 +5,25 @@
 from __future__ import print_function
 import sys
 
+def fasta_reader(filename):
+  return fasta_reader_fh(open(filename, 'r'))
+
+def fasta_reader_fh(infile):
+  name = infile.readline().rstrip()
+  while True:
+    seq = ""
+    for s in infile:
+      if len(s) > 0 and s[0] == '>':
+        yield name,seq
+        name = s.rstrip()
+        break
+      else:
+        seq += s.rstrip()
+    else:
+      yield name, seq
+      return
+
+
 def fastq_reader(filename):
   return fastq_reader_fh(open(filename, 'r'))
 
